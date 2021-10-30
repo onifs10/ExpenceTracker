@@ -32,7 +32,7 @@ app.get("/error", (req: Request, res: Response) => {
 // using api response util class i created this would help with uniformity
 
 app.get("/sample", (req: Request, res: Response) => {
-  const apiRes = new ApiResponse(res);
+  const apiRes: ApiResponse = new ApiResponse(res);
   apiRes
     .message("this a sample response")
     .success()
