@@ -6,7 +6,7 @@ export class ApiResponse {
     private resMessage: string = "",
     private statusCode: number = 200,
     private status: string = "suceess",
-    private resData: object = []
+    private resData?: object
   ) {}
   success(code: number = 200) {
     this.status = "success";
@@ -27,10 +27,17 @@ export class ApiResponse {
     return this;
   }
   send(data?: object) {
-    this.res.status(this.statusCode).json({
-      status: this.status,
-      message: this.resMessage,
-      data: data || this.resData,
-    });
+    if (!this.resData) {
+      this.res.status(this.statusCode).json({
+        status: this.status,
+        message: this.resMessage,
+      });
+    } else {
+      this.res.status(this.statusCode).json({
+        status: this.status,
+        message: this.resMessage,
+        data: data || this.resData,
+      });
+    }
   }
 }
