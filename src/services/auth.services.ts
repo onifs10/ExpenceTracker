@@ -1,4 +1,4 @@
-import UserModel from "../models/User.model";
+import UserModel  from "../models/User.model";
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
 
 export const register = async (

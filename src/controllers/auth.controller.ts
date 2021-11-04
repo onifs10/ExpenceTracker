@@ -1,7 +1,10 @@
 import { Request, Response, Router } from "express";
 import { register } from "../services/auth.services";
+import   validateUser  from "../controllers/validation.controller";
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
 import { ApiResponse } from "../utils/responseHelper";
+import UserModel from "../models/User.model";
+import { where } from "sequelize/types";
 const AuthRouter: Router = Router();
 AuthRouter.get("/login", (req: Request, res: Response) => {
   return new ApiResponse(res)
@@ -11,9 +14,28 @@ AuthRouter.get("/login", (req: Request, res: Response) => {
       password: "string | required",
     }).send;
 });
-AuthRouter.post("/login", async (req: Request, res: Response) => {});
+AuthRouter.post("/login", async (req: Request, res: Response) => {
+  
+});
 AuthRouter.post("/register", async (req: Request, res: Response) => {
   const response = new ApiResponse(res);
+  const { error } = validateUser(req.body);
+  if(error){
+    return response
+        .error(422)
+        .message("incorrect body parameters")
+        .data({
+          email: "string | required",
+          password: "string|required",
+          username: "string | required",
+        })
+  }
+  let user = await UserModel.findOne({
+    where:{
+      email: req.body.email
+    }
+  });
+  if(user) res.status(400).send('user already')
   try {
     const { email, password, username } = req.body;
     if (!email || !password || !username) {
@@ -21,7 +43,7 @@ AuthRouter.post("/register", async (req: Request, res: Response) => {
         .error(422)
         .message("incorrect body parameters")
         .data({
-          email: "string | requied",
+          email: "string | required",
           password: "string|required",
           username: "string | required",
         })

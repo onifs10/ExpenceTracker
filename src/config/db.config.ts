@@ -1,6 +1,6 @@
 import { Dialect } from "sequelize/types";
 
-// type
+// types
 
 export interface DbConfigType {
   HOST: string;
@@ -21,9 +21,9 @@ const config: DbConfigType = {
 
   USER: "root",
 
-  PASSWORD: "",
+  PASSWORD: "Booktime21#",
 
-  DB: "expense-tracker",
+  DB: "expensetracker",
 
   dialect: "mysql",
 
