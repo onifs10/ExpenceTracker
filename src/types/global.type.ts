@@ -1,5 +1,6 @@
 export default interface ServiceResponseType {
   state: ResponseStateType;
+  message: string;
   data?: any;
 }
 

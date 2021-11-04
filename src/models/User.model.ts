@@ -17,8 +17,19 @@ const UserModel = DB.define(
     email: {
       type: STRING,
       unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    password: {
+      type: STRING,
+      allowNull: false,
+      validate: {
+        len: [8, 10],
+      },
     },
   },
+
   {
     tableName: "users",
   }
