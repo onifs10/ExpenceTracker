@@ -30,6 +30,7 @@ export const register = async (
     // make sure email is lower case
     // store database
     // return sucessful response
+
     const userData = await UserModel.create(data);
     return {
       state: ResponseStateType.SUCCESS,

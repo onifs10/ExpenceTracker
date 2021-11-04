@@ -38,4 +38,26 @@ const config: DbConfigType = {
   },
 };
 
-export default config;
+const configTwo: DbConfigType = {
+  HOST: "127.0.0.1",
+
+  USER: "root",
+
+  PASSWORD: "",
+
+  DB: "expensetracker",
+
+  dialect: "mysql",
+
+  pool: {
+    max: 5,
+
+    min: 0,
+
+    acquire: 30000,
+
+    idle: 10000,
+  },
+};
+
+export default { config, configTwo };
