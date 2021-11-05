@@ -1,5 +1,5 @@
 import DB from "../db/db";
-import { INTEGER, ModelDefined, Optional, STRING } from "sequelize";
+import { INTEGER, Model, Optional, STRING } from "sequelize";
 
 interface User {
   id: number;
@@ -9,8 +9,9 @@ interface User {
 }
 
 interface UserCreationAttributes extends Optional<User, "id"> {}
+interface UserInstance extends Model<User, UserCreationAttributes>, User {}
 
-const UserModel: ModelDefined<User, UserCreationAttributes> = DB.define(
+const UserModel = DB.define<UserInstance>(
   "User",
   {
     id: {
