@@ -78,11 +78,16 @@ export const login = async (
     }
     // hash password
     const validPassword = await bcrypt.compare(data.password, users.password)
-
+    if(!validPassword){
+      return {
+        state: ResponseStateType.ERROR,
+        message: "Invalid credentials",
+      };
+    }else{
       return {
       state: ResponseStateType.SUCCESS,
-      message: "logged insuccesfully",
-      
+      message: "logged in succesfully",
+      }
     }
   } catch (e: any) {
     return {
