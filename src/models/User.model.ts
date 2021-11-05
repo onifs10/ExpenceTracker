@@ -37,6 +37,6 @@ const UserModel = DB.define(
   {
     tableName: "users",
   }
-);
+)
 
 export default UserModel;

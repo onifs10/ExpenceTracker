@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import * as AuthServices from "../services/auth.services";
 import Joi from "joi";
-import { RegisterDataType } from "../services/auth.services";
+import { RegisterDataType, LoginDataType } from "../services/auth.services";
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
 import { ApiResponse } from "../utils/responseHelper";
 import { send } from "process";
@@ -18,7 +18,42 @@ AuthRouter.get("/login", (req: Request, res: Response) => {
     }).send;
 });
 AuthRouter.post("/login", async (req: Request, res: Response) => {
+  const response = new ApiResponse(res);
   const { email, password} = req.body;
+   // validation
+   const { error } = AuthValidators.validateLoginRequest({
+    email,
+    password
+  });
+  if (error) {
+    return response
+      .error(422)
+      .message(error.message || "incorrect body parameters")
+      .data({
+        email: "string | required | valid email",
+        password: "string | required | min:8",
+        username: "string | required | min:3",
+      })
+      .send();
+  }
+  try {
+    const serviceResponse: ServiceResponseType = await AuthServices.login({
+      email,
+      password,
+    });
+    if (serviceResponse.state === ResponseStateType.SUCCESS) {
+      response.success();
+    } else {
+      response.error(400);
+    }
+    response.message(serviceResponse.message);
+    response.data(serviceResponse.data);
+    response.send();
+  } catch (e) {
+    response.error(500);
+    response.message("an error occured");
+    response.send();
+  }
  
 });
 
@@ -74,7 +109,7 @@ const AuthValidators = {
     });
     return schema.validate(user);
   },
-  validateLoginRequest: (user: RegisterDataType) => {
+  validateLoginRequest: (user: LoginDataType) => {
     const loginschema = Joi.object({
       email: Joi.string().required().email(),
       password: Joi.string().required().min(8),
