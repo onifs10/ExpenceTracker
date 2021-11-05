@@ -1,8 +1,8 @@
 Arguments: 
-  /home/boluwatife/.nvm/versions/node/v16.6.2/bin/node /usr/local/bin/yarn
+  /home/boluwatife/.nvm/versions/node/v16.6.2/bin/node /usr/local/bin/yarn start
 
 PATH: 
-  /home/boluwatife/.nvm/versions/node/v16.6.2/bin:/home/boluwatife/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/go/bin:/home/boluwatife/go/bin:/home/boluwatife/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/go/bin:/home/boluwatife/go/bin:/home/boluwatife/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/platform-tools
+  /home/boluwatife/Documents/miniProjects/ExpenceTracker/node_modules/.bin:/tmp/yarn--1636025786794-0.6609958599431875:/home/boluwatife/Documents/miniProjects/ExpenceTracker/node_modules/.bin:/home/boluwatife/.config/yarn/link/node_modules/.bin:/home/boluwatife/.yarn/bin:/home/boluwatife/.nvm/versions/node/v16.6.2/libexec/lib/node_modules/npm/bin/node-gyp-bin:/home/boluwatife/.nvm/versions/node/v16.6.2/lib/node_modules/npm/bin/node-gyp-bin:/home/boluwatife/.nvm/versions/node/v16.6.2/bin/node_modules/npm/bin/node-gyp-bin:/home/boluwatife/.nvm/versions/node/v16.6.2/bin:/home/boluwatife/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/go/bin:/home/boluwatife/go/bin:/home/boluwatife/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/go/bin:/home/boluwatife/go/bin:/home/boluwatife/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/platform-tools
 
 Yarn version: 
   1.22.11
@@ -14,8 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:71:26)
+  Error: EIO: i/o error, write
+      at writeSync (node:fs:881:3)
+      at SyncWriteStream._write (node:internal/fs/sync_write_stream:25:3)
+      at writeOrBuffer (node:internal/streams/writable:389:12)
+      at _write (node:internal/streams/writable:330:10)
+      at SyncWriteStream.Writable.write (node:internal/streams/writable:334:10)
+      at ConsoleReporter._log (/usr/local/lib/node_modules/yarn/lib/cli.js:96784:17)
+      at ConsoleReporter.log (/usr/local/lib/node_modules/yarn/lib/cli.js:96772:10)
+      at ConsoleReporter.command (/usr/local/lib/node_modules/yarn/lib/cli.js:96801:10)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:34549:16
+      at Generator.next (<anonymous>)
 
 npm manifest: 
   {
@@ -111,6 +120,18 @@ Lockfile:
       minimatch "^3.0.4"
       strip-json-comments "^3.1.1"
   
+  "@hapi/hoek@^9.0.0":
+    version "9.2.1"
+    resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.1.tgz#9551142a1980503752536b5050fd99f4a7f13b17"
+    integrity sha512-gfta+H8aziZsm8pZa0vj04KO6biEiisppNgA1kbJvFrrWu9Vm7eaUEy76DIxsuTaWvti5fkJVhllWc6ZTE+Mdw==
+  
+  "@hapi/topo@^5.0.0":
+    version "5.1.0"
+    resolved "https://registry.yarnpkg.com/@hapi/topo/-/topo-5.1.0.tgz#dc448e332c6c6e37a4dc02fd84ba8d44b9afb012"
+    integrity sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==
+    dependencies:
+      "@hapi/hoek" "^9.0.0"
+  
   "@humanwhocodes/config-array@^0.6.0":
     version "0.6.0"
     resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.6.0.tgz#b5621fdb3b32309d2d16575456cbc277fa8f021a"
@@ -124,6 +145,23 @@ Lockfile:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
     integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
+  
+  "@sideway/address@^4.1.0":
+    version "4.1.2"
+    resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.2.tgz#811b84333a335739d3969cfc434736268170cad1"
+    integrity sha512-idTz8ibqWFrPU8kMirL0CoPH/A29XOzzAzpyN3zQ4kAWnzmNfFmRaoMNN6VI8ske5M73HZyhIaW4OuSFIdM4oA==
+    dependencies:
+      "@hapi/hoek" "^9.0.0"
+  
+  "@sideway/formula@^3.0.0":
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/@sideway/formula/-/formula-3.0.0.tgz#fe158aee32e6bd5de85044be615bc08478a0a13c"
+    integrity sha512-vHe7wZ4NOXVfkoRb8T5otiENVlT7a3IAiw7H5M2+GO+9CDgcVUUsX1zalAztCmwyOr2RUTGJdgB+ZvSVqmdHmg==
+  
+  "@sideway/pinpoint@^2.0.0":
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
+    integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
   
   "@sindresorhus/is@^0.14.0":
     version "0.14.0"
@@ -190,6 +228,13 @@ Lockfile:
       "@types/express-serve-static-core" "^4.17.18"
       "@types/qs" "*"
       "@types/serve-static" "*"
+  
+  "@types/joi@^17.2.3":
+    version "17.2.3"
+    resolved "https://registry.yarnpkg.com/@types/joi/-/joi-17.2.3.tgz#b7768ed9d84f1ebd393328b9f97c1cf3d2b94798"
+    integrity sha512-dGjs/lhrWOa+eO0HwgxCSnDm5eMGCsXuvLglMghJq32F6q5LyyNuXb41DHzrg501CKNOSSAHmfB7FDGeUnDmzw==
+    dependencies:
+      joi "*"
   
   "@types/json5@^0.0.29":
     version "0.0.29"
@@ -1625,6 +1670,17 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
     integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
+  
+  joi@*, joi@^17.4.2:
+    version "17.4.2"
+    resolved "https://registry.yarnpkg.com/joi/-/joi-17.4.2.tgz#02f4eb5cf88e515e614830239379dcbbe28ce7f7"
+    integrity sha512-Lm56PP+n0+Z2A2rfRvsfWVDXGEWjXxatPopkQ8qQ5mxCEhwHG+Ettgg5o98FFaxilOxozoa14cFhrE/hOzh/Nw==
+    dependencies:
+      "@hapi/hoek" "^9.0.0"
+      "@hapi/topo" "^5.0.0"
+      "@sideway/address" "^4.1.0"
+      "@sideway/formula" "^3.0.0"
+      "@sideway/pinpoint" "^2.0.0"
   
   js-beautify@^1.8.8:
     version "1.14.0"

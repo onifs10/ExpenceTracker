@@ -30,6 +30,7 @@ export const register = async (
         email: data.email,
       },
     });
+
     if (user) {
       return {
         state: ResponseStateType.ERROR,
@@ -41,9 +42,9 @@ export const register = async (
     data.password = await hash(data.password, salt);
     // make sure email is lower case
     data.email = data.email.toLowerCase();
-
+    // create user
     const userData = await UserModel.create(data);
-      return {
+    return {
       state: ResponseStateType.SUCCESS,
       message: "account created succesfully",
       data: {
