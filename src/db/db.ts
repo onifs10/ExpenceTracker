@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import dbCon from "../config/db.config";
 
-const dbConfig = dbCon.config;
+const dbConfig = dbCon.configTwo;
 
 // creating an instance of Sequelize to db connection
 const sequelize: Sequelize = new Sequelize(

@@ -1,5 +1,7 @@
 import UserModel from "../models/User.model";
+import  { genSalt, hash } from "bcrypt";
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
+import { resolve } from "path/posix";
 
 // types
 export type RegisterDataType = {
@@ -27,12 +29,13 @@ export const register = async (
       };
     }
     // hash password
+    const salt = await genSalt(10);
+    data.password = await hash(data.password, salt);
     // make sure email is lower case
-    // store database
-    // return sucessful response
+    data.email = data.email.toLowerCase();
 
     const userData = await UserModel.create(data);
-    return {
+      return {
       state: ResponseStateType.SUCCESS,
       message: "account created succesfully",
       data: {

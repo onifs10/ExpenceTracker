@@ -17,7 +17,10 @@ AuthRouter.get("/login", (req: Request, res: Response) => {
       password: "string | required",
     }).send;
 });
-AuthRouter.post("/login", async (req: Request, res: Response) => {});
+AuthRouter.post("/login", async (req: Request, res: Response) => {
+  const { email, password} = req.body;
+ 
+});
 
 AuthRouter.post("/register", async (req: Request, res: Response) => {
   const response = new ApiResponse(res);
@@ -71,4 +74,12 @@ const AuthValidators = {
     });
     return schema.validate(user);
   },
+  validateLoginRequest: (user: RegisterDataType) => {
+    const loginschema = Joi.object({
+      email: Joi.string().required().email(),
+      password: Joi.string().required().min(8),
+    })
+    return loginschema.validate(user)
+}
 };
+

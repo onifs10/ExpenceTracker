@@ -1,6 +1,7 @@
 import DB from "../db/db";
 import { INTEGER, STRING } from "sequelize";
 
+
 const UserModel = DB.define(
   "User",
   {
@@ -17,17 +18,20 @@ const UserModel = DB.define(
     email: {
       type: STRING,
       unique: true,
-      validate: {
-        isEmail: true,
-      },
+      validate:{
+        isEmail: true
+      }
     },
     password: {
       type: STRING,
       allowNull: false,
-      validate: {
-        len: [8, 10],
-      },
-    },
+      validate:{
+        len: [8, 1024]
+      }
+    }
+      
+      
+    
   },
 
   {
