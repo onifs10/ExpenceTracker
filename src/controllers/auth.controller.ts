@@ -74,15 +74,12 @@ const AuthValidators = {
     });
     return schema.validate(user);
   },
+  validateLoginRequest: (user: RegisterDataType) => {
+    const loginschema = Joi.object({
+      email: Joi.string().required().email(),
+      password: Joi.string().required().min(8),
+    })
+    return loginschema.validate(user)
+}
 };
 
-// login validator
-const loginValidator = {
-  validateLoginRequest: (user: RegisterDataType) => {
-      const loginschema = Joi.object({
-        email: Joi.string().required().email(),
-        password: Joi.string().required().min(8),
-      })
-      return loginschema.validate(user)
-  }
-};

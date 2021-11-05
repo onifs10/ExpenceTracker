@@ -1,7 +1,6 @@
 import UserModel from "../models/User.model";
-import bcrypt, { genSalt, hash } from "bcrypt";
+import  { genSalt, hash } from "bcrypt";
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
-import e from "express";
 import { resolve } from "path/posix";
 
 // types
@@ -30,8 +29,8 @@ export const register = async (
       };
     }
     // hash password
-    const salt = await bcrypt.genSalt(10);
-    data.password = await bcrypt.hash(data.password, salt);
+    const salt = await genSalt(10);
+    data.password = await hash(data.password, salt);
     // make sure email is lower case
     data.email = data.email.toLowerCase();
 
