@@ -22,6 +22,7 @@ export const register = async (
         email: data.email,
       },
     });
+
     if (user) {
       return {
         state: ResponseStateType.ERROR,

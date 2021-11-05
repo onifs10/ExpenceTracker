@@ -1,8 +1,16 @@
 import DB from "../db/db";
-import { INTEGER, STRING } from "sequelize";
+import { INTEGER, ModelDefined, Optional, STRING } from "sequelize";
 
+interface User {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+}
 
-const UserModel = DB.define(
+interface UserCreationAttributes extends Optional<User, "id"> {}
+
+const UserModel: ModelDefined<User, UserCreationAttributes> = DB.define(
   "User",
   {
     id: {
@@ -18,20 +26,17 @@ const UserModel = DB.define(
     email: {
       type: STRING,
       unique: true,
-      validate:{
-        isEmail: true
-      }
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
       type: STRING,
       allowNull: false,
-      validate:{
-        len: [8, 1024]
-      }
-    }
-      
-      
-    
+      validate: {
+        len: [8, 1024],
+      },
+    },
   },
 
   {
