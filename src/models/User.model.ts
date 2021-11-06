@@ -48,7 +48,7 @@ const UserModel = DB.define<UserInstance>(
 );
 
 UserModel.prototype.validatePassword = function (password: string) {
-  return compare(this.password, password);
+  return compare(password, this.password);
 };
 
 export default UserModel;
