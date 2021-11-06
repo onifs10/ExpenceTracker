@@ -6,6 +6,7 @@ import UserModel from "../models/User.model";
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: authConfig.secret_key,
+  expiresIn: authConfig.expiresIn,
 };
 
 export default (passport: PassportStatic) => {
