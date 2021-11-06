@@ -19,11 +19,11 @@ AuthRouter.get("/login", (req: Request, res: Response) => {
 });
 AuthRouter.post("/login", async (req: Request, res: Response) => {
   const response = new ApiResponse(res);
-  const { email, password} = req.body;
-   // validation
-   const { error } = AuthValidators.validateLoginRequest({
+  const { email, password } = req.body;
+  // validation
+  const { error } = AuthValidators.validateLoginRequest({
     email,
-    password
+    password,
   });
   if (error) {
     return response
@@ -54,7 +54,6 @@ AuthRouter.post("/login", async (req: Request, res: Response) => {
     response.message("an error occured");
     response.send();
   }
- 
 });
 
 AuthRouter.post("/register", async (req: Request, res: Response) => {
@@ -113,8 +112,7 @@ const AuthValidators = {
     const loginschema = Joi.object({
       email: Joi.string().required().email(),
       password: Joi.string().required().min(8),
-    })
-    return loginschema.validate(user)
-}
+    });
+    return loginschema.validate(user);
+  },
 };
-

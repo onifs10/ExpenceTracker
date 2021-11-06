@@ -1,10 +1,7 @@
 import UserModel from "../models/User.model";
-import { genSalt, hash , compare} from "bcrypt";
+import { genSalt, hash } from "bcrypt";
 
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
-import { resolve } from "path/posix";
-import { userInfo } from "os";
-import { Model } from "sequelize/types";
 
 // types
 export type RegisterDataType = {
@@ -18,9 +15,7 @@ export type LoginDataType = {
   password: string;
 };
 
-
 // functions
-
 export const register = async (
   data: RegisterDataType
 ): Promise<ServiceResponseType> => {
@@ -60,36 +55,35 @@ export const register = async (
   }
 };
 
-
-
 export const login = async (
   data: LoginDataType
 ): Promise<ServiceResponseType> => {
   try {
     // check if user exist
-    const users = await UserModel.findOne({
+    const user = await UserModel.findOne({
       where: {
         email: data.email,
       },
     });
-    if (!users) {
+    if (!user) {
       return {
         state: ResponseStateType.ERROR,
         message: "Invalid credentials",
       };
     }
-    // hash password
-    const validPassword = await compare(data.password, users.password)
-    if(!validPassword){
+    // validate password
+    const validPassword = await user.validatePassword(data.password);
+
+    if (!validPassword) {
       return {
         state: ResponseStateType.ERROR,
         message: "Invalid credentials",
       };
-    }else{
+    } else {
       return {
-      state: ResponseStateType.SUCCESS,
-      message: "logged in succesfully",
-      }
+        state: ResponseStateType.SUCCESS,
+        message: "logged in succesfully",
+      };
     }
   } catch (e: any) {
     return {
@@ -98,4 +92,3 @@ export const login = async (
     };
   }
 };
-

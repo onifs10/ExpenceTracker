@@ -1,6 +1,6 @@
 import DB from "../db/db";
 import { INTEGER, Model, Optional, STRING } from "sequelize";
-
+import { compare } from "bcrypt";
 interface User {
   id: number;
   username: string;
@@ -9,7 +9,9 @@ interface User {
 }
 
 interface UserCreationAttributes extends Optional<User, "id"> {}
-interface UserInstance extends Model<User, UserCreationAttributes>, User {}
+interface UserInstance extends Model<User, UserCreationAttributes>, User {
+  validatePassword: (password: string) => Promise<boolean>;
+}
 
 const UserModel = DB.define<UserInstance>(
   "User",
@@ -43,6 +45,10 @@ const UserModel = DB.define<UserInstance>(
   {
     tableName: "users",
   }
-)
+);
+
+UserModel.prototype.validatePassword = function (password: string) {
+  return compare(this.password, password);
+};
 
 export default UserModel;
