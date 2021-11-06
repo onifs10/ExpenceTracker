@@ -43,6 +43,6 @@ const UserModel = DB.define<UserInstance>(
   {
     tableName: "users",
   }
-);
+)
 
 export default UserModel;
