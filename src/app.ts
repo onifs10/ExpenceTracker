@@ -3,13 +3,15 @@ import { ApiResponse } from "./utils/responseHelper";
 import DB from "./db/db";
 import AuthRouter from "./controllers/auth.controller";
 import { json } from "body-parser";
-
+import passport from "passport";
+import authMiddleware from "./middlewares/auth.middleware";
 // create app
 const app = express();
 
 // middlewares
 app.use(json());
-
+app.use(passport.initialize());
+authMiddleware(passport);
 // test db connection
 try {
   DB.authenticate();
@@ -25,7 +27,10 @@ DB.sync().then(() => {
 
 // routes
 app.get("/", (req, res) => {
-  res.send("The sedulous hyena ate the antelope!");
+  passport.authenticate("jwt", { session: false })(req, res, () => {
+    console.log(req.user);
+    res.send("The sedulous hyena ate the antelope!");
+  });
 });
 app.use("/api/auth", AuthRouter);
 

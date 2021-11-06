@@ -73,7 +73,6 @@ export const login = async (
     }
     // validate password
     const validPassword = await user.validatePassword(data.password);
-
     if (!validPassword) {
       return {
         state: ResponseStateType.ERROR,
@@ -83,6 +82,10 @@ export const login = async (
       return {
         state: ResponseStateType.SUCCESS,
         message: "logged in succesfully",
+        data: {
+          user,
+          ...user.genrateToken(),
+        },
       };
     }
   } catch (e: any) {
