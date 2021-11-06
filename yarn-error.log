@@ -1,8 +1,8 @@
 Arguments: 
-  /home/boluwatife/.nvm/versions/node/v16.6.2/bin/node /usr/local/bin/yarn start
+  /home/boluwatife/.nvm/versions/node/v16.6.2/bin/node /usr/local/bin/yarn add passporl-local
 
 PATH: 
-  /home/boluwatife/Documents/miniProjects/ExpenceTracker/node_modules/.bin:/tmp/yarn--1636153461200-0.07893591604180039:/home/boluwatife/Documents/miniProjects/ExpenceTracker/node_modules/.bin:/home/boluwatife/.config/yarn/link/node_modules/.bin:/home/boluwatife/.yarn/bin:/home/boluwatife/.nvm/versions/node/v16.6.2/libexec/lib/node_modules/npm/bin/node-gyp-bin:/home/boluwatife/.nvm/versions/node/v16.6.2/lib/node_modules/npm/bin/node-gyp-bin:/home/boluwatife/.nvm/versions/node/v16.6.2/bin/node_modules/npm/bin/node-gyp-bin:/home/boluwatife/.nvm/versions/node/v16.6.2/bin:/home/boluwatife/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/go/bin:/home/boluwatife/go/bin:/home/boluwatife/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin
+  /home/boluwatife/.nvm/versions/node/v16.6.2/bin:/home/boluwatife/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/go/bin:/home/boluwatife/go/bin:/home/boluwatife/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/go/bin:/home/boluwatife/go/bin:/home/boluwatife/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/platform-tools
 
 Yarn version: 
   1.22.11
@@ -14,17 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  Error: EIO: i/o error, write
-      at writeSync (node:fs:881:3)
-      at SyncWriteStream._write (node:internal/fs/sync_write_stream:25:3)
-      at writeOrBuffer (node:internal/streams/writable:389:12)
-      at _write (node:internal/streams/writable:330:10)
-      at SyncWriteStream.Writable.write (node:internal/streams/writable:334:10)
-      at ConsoleReporter._log (/usr/local/lib/node_modules/yarn/lib/cli.js:96784:17)
-      at ConsoleReporter.log (/usr/local/lib/node_modules/yarn/lib/cli.js:96772:10)
-      at ConsoleReporter.command (/usr/local/lib/node_modules/yarn/lib/cli.js:96801:10)
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:34549:16
-      at Generator.next (<anonymous>)
+  Error: https://registry.yarnpkg.com/passporl-local: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66992:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140763:22)
+      at Request.emit (node:events:394:28)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141735:10)
+      at Request.emit (node:events:394:28)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141657:12)
+      at Object.onceWrapper (node:events:513:28)
+      at IncomingMessage.emit (node:events:406:35)
+      at endReadableNT (node:internal/streams/readable:1331:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
 
 npm manifest: 
   {
@@ -60,6 +60,7 @@ npm manifest:
       "joi": "^17.4.2",
       "jsonwebtoken": "^8.5.1",
       "mysql2": "^2.3.2",
+      "passport": "^0.5.0",
       "sequelize": "^6.9.0",
       "sequelize-cli": "^6.2.0",
       "ts-node": "^10.4.0"
@@ -2373,6 +2374,19 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
     integrity sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==
   
+  passport-strategy@1.x.x:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
+    integrity sha1-tVOaqPwiWj0a0XlHbd8ja0QPUuQ=
+  
+  passport@^0.5.0:
+    version "0.5.0"
+    resolved "https://registry.yarnpkg.com/passport/-/passport-0.5.0.tgz#7914aaa55844f9dce8c3aa28f7d6b73647ee0169"
+    integrity sha512-ln+ue5YaNDS+fes6O5PCzXKSseY5u8MYhX9H5Co4s+HfYI5oqvnHKoOORLYDUPh+8tHvrxugF2GFcUA1Q1Gqfg==
+    dependencies:
+      passport-strategy "1.x.x"
+      pause "0.0.1"
+  
   path-exists@^3.0.0:
     version "3.0.0"
     resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-3.0.0.tgz#ce0ebeaa5f78cb18925ea7d810d7b59b010fd515"
@@ -2397,6 +2411,11 @@ Lockfile:
     version "0.1.7"
     resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
     integrity sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
+  
+  pause@0.0.1:
+    version "0.0.1"
+    resolved "https://registry.yarnpkg.com/pause/-/pause-0.0.1.tgz#1d408b3fdb76923b9543d96fb4c9dfd535d9cb5d"
+    integrity sha1-HUCLP9t2kjuVQ9lvtMnf1TXZy10=
   
   picomatch@^2.0.4, picomatch@^2.2.1:
     version "2.3.0"
