@@ -1,6 +1,6 @@
 import { PassportStatic } from "passport";
 import { Strategy, ExtractJwt } from "passport-jwt";
-import authConfig from "../config/auth.config";
+import authConfig from "./auth.config";
 import UserModel from "../models/User.model";
 
 const opts = {

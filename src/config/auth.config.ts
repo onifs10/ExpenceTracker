@@ -1,5 +1,3 @@
-import { Algorithm } from "jsonwebtoken";
-
 export interface ConfigTypes {
   secret_key: string;
   isUser: string;

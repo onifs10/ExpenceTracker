@@ -1,18 +1,22 @@
 import express, { Request, Response } from "express";
-import { ApiResponse } from "./utils/responseHelper";
 import DB from "./db/db";
 import AuthRouter from "./controllers/auth.controller";
 import { json } from "body-parser";
 import passport from "passport";
-import authMiddleware from "./middlewares/auth.middleware";
+import passportConfig from "./config/passport.config";
+import HandleProtectedRequest from "./utils/protectedRouteHandler.util";
 // create app
+
 const app = express();
+
+// passport config
+passportConfig(passport);
 
 // middlewares
 app.use(json());
 app.use(passport.initialize());
-authMiddleware(passport);
 // test db connection
+
 try {
   DB.authenticate();
   console.log("Connection has been established successfully.");
@@ -26,49 +30,12 @@ DB.sync().then(() => {
 });
 
 // routes
-app.get("/", (req, res) => {
-  passport.authenticate("jwt", { session: false })(req, res, () => {
-    console.log(req.user);
-    res.send("The sedulous hyena ate the antelope!");
-  });
-});
 app.use("/api/auth", AuthRouter);
 
-// with type annotation
-app.get("/success", (req: Request, res: Response) => {
-  res
-    .json({
-      status: "success",
-      message: "successfull endpoint hit",
-    })
-    .status(200)
-    .send();
-});
-
-// with type annotation
-app.get("/error", (req: Request, res: Response) => {
-  res
-    .json({
-      status: "error",
-      message: "an error occurred",
-    })
-    .status(400)
-    .send();
-});
-
-// using api response util class i created this would help with uniformity
-app.get("/sample", (req: Request, res: Response) => {
-  const apiRes: ApiResponse = new ApiResponse(res);
-  apiRes
-    .message("this a sample response")
-    .success()
-    .send({
-      user: {
-        name: "okafor",
-        email: "okaforchisom@gmail.com",
-        token: "test",
-      },
-    });
+app.get("/", (req: Request, res: Response) => {
+  HandleProtectedRequest(req, res, async (req: Request, res: Response) => {
+    res.send("The sedulous hyena ate the antelope!");
+  });
 });
 
 const PORT = process.env.PORT || 3000;
