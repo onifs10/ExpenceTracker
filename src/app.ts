@@ -3,6 +3,8 @@ import { ApiResponse } from "./utils/responseHelper";
 import DB from "./db/db";
 import AuthRouter from "./controllers/auth.controller";
 import { json } from "body-parser";
+import UserModel from "./models/User.model";
+import ExpenseModel from "./models/Expense.model";
 
 // create app
 const app = express();
@@ -17,6 +19,13 @@ try {
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
+
+UserModel.hasMany(ExpenseModel, {
+  foreignKey: 
+  {name: 'user_id',
+  allowNull: false}
+});
+
 
 // db sync
 DB.sync().then(() => {
