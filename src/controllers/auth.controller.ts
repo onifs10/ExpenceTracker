@@ -19,19 +19,11 @@ AuthRouter.get("/login", (req: Request, res: Response) => {
 });
 AuthRouter.post("/login", async (req: Request, res: Response) => {
   const response = new ApiResponse(res);
-<<<<<<< HEAD
   const { email, password} = req.body;
    // validation
    const { error } = AuthValidators.validateLoginRequest({
     email,
     password
-=======
-  const { email, password } = req.body;
-  // validation
-  const { error } = AuthValidators.validateLoginRequest({
-    email,
-    password,
->>>>>>> 7fac7ccf26cf7ce76fb390687834d4b318c2a1b3
   });
   if (error) {
     return response
@@ -62,10 +54,6 @@ AuthRouter.post("/login", async (req: Request, res: Response) => {
     response.message("an error occured");
     response.send();
   }
-<<<<<<< HEAD
- 
-=======
->>>>>>> 7fac7ccf26cf7ce76fb390687834d4b318c2a1b3
 });
 
 AuthRouter.post("/register", async (req: Request, res: Response) => {

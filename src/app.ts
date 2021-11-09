@@ -2,15 +2,12 @@ import express, { Request, Response } from "express";
 import DB from "./db/db";
 import AuthRouter from "./controllers/auth.controller";
 import { json } from "body-parser";
-<<<<<<< HEAD
 import UserModel from "./models/User.model";
 import ExpenseModel from "./models/Expense.model";
 
-=======
 import passport from "passport";
 import passportConfig from "./config/passport.config";
 import HandleProtectedRequest from "./utils/protectedRouteHandler.util";
->>>>>>> 7fac7ccf26cf7ce76fb390687834d4b318c2a1b3
 // create app
 
 const app = express();
