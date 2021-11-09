@@ -21,7 +21,7 @@ const config: DbConfigType = {
 
   USER: "root",
 
-  PASSWORD: "Booktime21#",
+  PASSWORD: "",
 
   DB: "expensetracker",
 
