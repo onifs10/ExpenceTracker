@@ -1,5 +1,6 @@
 import UserModel from "../models/User.model";
-import bcrypt, { genSalt, hash } from "bcrypt";
+import { genSalt, hash , compare} from "bcrypt";
+
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
 import { resolve } from "path/posix";
 import { userInfo } from "os";
@@ -78,7 +79,7 @@ export const login = async (
       };
     }
     // hash password
-    const validPassword = await bcrypt.compare(data.password, users.password)
+    const validPassword = await compare(data.password, users.password)
     if(!validPassword){
       return {
         state: ResponseStateType.ERROR,
