@@ -61,4 +61,3 @@ const configTwo: DbConfigType = {
 };
 
 export default { config, configTwo };
-
