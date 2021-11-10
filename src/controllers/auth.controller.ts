@@ -19,11 +19,11 @@ AuthRouter.get("/login", (req: Request, res: Response) => {
 });
 AuthRouter.post("/login", async (req: Request, res: Response) => {
   const response = new ApiResponse(res);
-  const { email, password } = req.body;
-  // validation
-  const { error } = AuthValidators.validateLoginRequest({
+  const { email, password} = req.body;
+   // validation
+   const { error } = AuthValidators.validateLoginRequest({
     email,
-    password,
+    password
   });
   if (error) {
     return response

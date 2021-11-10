@@ -1,7 +1,10 @@
 import UserModel from "../models/User.model";
-import { genSalt, hash } from "bcrypt";
+import { genSalt, hash , compare} from "bcrypt";
 
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
+import { resolve } from "path/posix";
+import { userInfo } from "os";
+import { Model } from "sequelize/types";
 
 // types
 export type RegisterDataType = {
@@ -71,9 +74,9 @@ export const login = async (
         message: "Invalid credentials",
       };
     }
-    // validate password
+    // hash password
     const validPassword = await user.validatePassword(data.password);
-    if (!validPassword) {
+    if(!validPassword){
       return {
         state: ResponseStateType.ERROR,
         message: "Invalid credentials",
@@ -95,3 +98,4 @@ export const login = async (
     };
   }
 };
+

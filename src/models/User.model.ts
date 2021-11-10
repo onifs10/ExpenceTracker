@@ -1,4 +1,5 @@
 import DB from "../db/db";
+import ExpenseModel from  "./Expense.model"
 import { INTEGER, Model, Optional, STRING } from "sequelize";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
@@ -47,7 +48,7 @@ const UserModel = DB.define<UserInstance>(
   {
     tableName: "users",
   }
-);
+)
 
 UserModel.prototype.validatePassword = function (password: string) {
   return compare(password, this.password);
@@ -73,4 +74,11 @@ UserModel.prototype.toJSON = function () {
   delete user.password;
   return user;
 };
+
+UserModel.hasMany(ExpenseModel, {
+  foreignKey: 
+  {name: 'user_id',
+  allowNull: false}
+});
+
 export default UserModel;

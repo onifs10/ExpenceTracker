@@ -2,6 +2,9 @@ import express, { Request, Response } from "express";
 import DB from "./db/db";
 import AuthRouter from "./controllers/auth.controller";
 import { json } from "body-parser";
+import UserModel from "./models/User.model";
+import ExpenseModel from "./models/Expense.model";
+
 import passport from "passport";
 import passportConfig from "./config/passport.config";
 import HandleProtectedRequest from "./utils/protectedRouteHandler.util";
@@ -23,6 +26,13 @@ try {
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
+
+UserModel.hasMany(ExpenseModel, {
+  foreignKey: 
+  {name: 'user_id',
+  allowNull: false}
+});
+
 
 // db sync
 DB.sync().then(() => {
