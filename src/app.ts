@@ -2,14 +2,14 @@ import express, { Request, Response } from "express";
 import DB from "./db/db";
 import AuthRouter from "./controllers/auth.controller";
 import { json } from "body-parser";
-import UserModel from "./models/User.model";
-import ExpenseModel from "./models/Expense.model";
 
 import passport from "passport";
 import passportConfig from "./config/passport.config";
 import HandleProtectedRequest from "./utils/protectedRouteHandler.util";
-// create app
+import ExpenseRouter from "./controllers/expense.controller";
+import { UserInstance } from "./models/User.model";
 
+// create app
 const app = express();
 
 // passport config
@@ -27,13 +27,6 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
-UserModel.hasMany(ExpenseModel, {
-  foreignKey: 
-  {name: 'user_id',
-  allowNull: false}
-});
-
-
 // db sync
 DB.sync().then(() => {
   console.log("data base connected");
@@ -41,9 +34,10 @@ DB.sync().then(() => {
 
 // routes
 app.use("/api/auth", AuthRouter);
+app.use("/api/expenses", ExpenseRouter);
 
 app.get("/", (req: Request, res: Response) => {
-  HandleProtectedRequest(req, res, async (req: Request, res: Response) => {
+  HandleProtectedRequest(req, res, async () => {
     res.send("The sedulous hyena ate the antelope!");
   });
 });

@@ -1,16 +1,14 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import passport from "passport";
 
-type HandleRequest = (
-  req: Request,
-  res: Response,
-  cb: (req: Request, res: Response) => Promise<void>
-) => void;
+type HandleRequest = (req: Request, res: Response, next?: NextFunction) => void;
 
-const HandleProtectedRequest: HandleRequest = (req, res, cb) => {
-  passport.authenticate("jwt", { session: false })(req, res, () =>
-    cb(req, res)
-  );
+const HandleProtectedRequest: HandleRequest = (req, res, next) => {
+  passport.authenticate("jwt", { session: false })(req, res, () => {
+    if (next) {
+      next();
+    }
+  });
 };
 
 export default HandleProtectedRequest;

@@ -1,20 +1,28 @@
 import DB from "../db/db";
-import ExpenseModel from  "./Expense.model"
+import ExpenseModel, {
+  ExpenseInstance,
+  ExpensesCreationAttributes,
+} from "./Expense.model";
 import { INTEGER, Model, Optional, STRING } from "sequelize";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import authConfig from "../config/auth.config";
-interface User {
+
+export interface User {
   id: number;
   username: string;
   email: string;
   password: string;
 }
 
-interface UserCreationAttributes extends Optional<User, "id"> {}
-interface UserInstance extends Model<User, UserCreationAttributes>, User {
+export interface UserCreationAttributes extends Optional<User, "id"> {}
+export interface UserInstance
+  extends Model<User, UserCreationAttributes>,
+    User {
   validatePassword: (password: string) => Promise<boolean>;
   genrateToken: () => { token: string; expires: number };
+  getExpenses: () => Promise<ExpenseInstance[]>;
+  createExpense: (expense: ExpensesCreationAttributes) => Promise<ExpenseInstance>;
 }
 
 const UserModel = DB.define<UserInstance>(
@@ -48,7 +56,7 @@ const UserModel = DB.define<UserInstance>(
   {
     tableName: "users",
   }
-)
+);
 
 UserModel.prototype.validatePassword = function (password: string) {
   return compare(password, this.password);
@@ -76,9 +84,7 @@ UserModel.prototype.toJSON = function () {
 };
 
 UserModel.hasMany(ExpenseModel, {
-  foreignKey: 
-  {name: 'user_id',
-  allowNull: false}
+  foreignKey: { name: "user_id", allowNull: false },
 });
 
 export default UserModel;

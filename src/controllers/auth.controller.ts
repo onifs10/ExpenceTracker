@@ -4,7 +4,6 @@ import Joi from "joi";
 import { RegisterDataType, LoginDataType } from "../services/auth.services";
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
 import { ApiResponse } from "../utils/responseHelper";
-import { send } from "process";
 
 // endpoints
 const AuthRouter: Router = Router();
@@ -15,15 +14,16 @@ AuthRouter.get("/login", (req: Request, res: Response) => {
     .data({
       email: "string | requied",
       password: "string | required",
-    }).send;
+    })
+    .send();
 });
 AuthRouter.post("/login", async (req: Request, res: Response) => {
   const response = new ApiResponse(res);
-  const { email, password} = req.body;
-   // validation
-   const { error } = AuthValidators.validateLoginRequest({
+  const { email, password } = req.body;
+  // validation
+  const { error } = AuthValidators.validateLoginRequest({
     email,
-    password
+    password,
   });
   if (error) {
     return response
