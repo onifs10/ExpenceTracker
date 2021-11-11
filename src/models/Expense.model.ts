@@ -1,9 +1,10 @@
 import DB from "../db/db";
-import { DATE, FLOAT, INTEGER, Model, Optional, STRING } from "sequelize";
+import { DATE, FLOAT, INTEGER, Model, Optional, STRING, TEXT } from "sequelize";
 
 interface Expense {
   id: number;
   category: string;
+  description: string;
   amount: number;
 }
 
@@ -20,6 +21,10 @@ const ExpenseModel = DB.define(
       autoIncrement: true,
       allowNull: false,
       primaryKey: true,
+    },
+    description: {
+      type: TEXT,
+      allowNull: false,
     },
     category: {
       type: STRING,

@@ -4,6 +4,7 @@ import Joi from "joi";
 import { RegisterDataType, LoginDataType } from "../services/auth.services";
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
 import { ApiResponse } from "../utils/responseHelper";
+import generateResponse from "../utils/generateResponse";
 
 // endpoints
 const AuthRouter: Router = Router();
@@ -41,13 +42,7 @@ AuthRouter.post("/login", async (req: Request, res: Response) => {
       email,
       password,
     });
-    if (serviceResponse.state === ResponseStateType.SUCCESS) {
-      response.success();
-    } else {
-      response.error(400);
-    }
-    response.message(serviceResponse.message);
-    response.data(serviceResponse.data);
+    generateResponse(serviceResponse, response);
     response.send();
   } catch (e) {
     response.error(500);
@@ -82,13 +77,7 @@ AuthRouter.post("/register", async (req: Request, res: Response) => {
       password,
       username,
     });
-    if (serviceResponse.state === ResponseStateType.SUCCESS) {
-      response.success();
-    } else {
-      response.error(400);
-    }
-    response.message(serviceResponse.message);
-    response.data(serviceResponse.data);
+    generateResponse(serviceResponse, response);
     response.send();
   } catch (e) {
     response.error(500);
@@ -96,7 +85,6 @@ AuthRouter.post("/register", async (req: Request, res: Response) => {
     response.send();
   }
 });
-export default AuthRouter;
 
 // AuthValidators
 const AuthValidators = {
@@ -116,3 +104,5 @@ const AuthValidators = {
     return loginschema.validate(user);
   },
 };
+
+export default AuthRouter;

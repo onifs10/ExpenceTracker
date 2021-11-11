@@ -1,7 +1,7 @@
 export default interface ServiceResponseType {
   state: ResponseStateType;
   message: string;
-  data?: any;
+  data?: object;
 }
 
 export enum ResponseStateType {
