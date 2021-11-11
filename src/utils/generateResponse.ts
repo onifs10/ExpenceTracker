@@ -16,8 +16,14 @@ const generateResponse = (
 ): void => {
   if (serviceResponse.state === ResponseStateType.SUCCESS) {
     apiResponse.success(200);
+    if (serviceResponse.statusCode) {
+      apiResponse.success(serviceResponse.statusCode);
+    }
   } else {
     apiResponse.error(500);
+    if (serviceResponse.statusCode) {
+      apiResponse.error(serviceResponse.statusCode);
+    }
   }
   apiResponse.message(serviceResponse.message);
   if (serviceResponse.data) {

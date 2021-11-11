@@ -1,11 +1,12 @@
 import DB from "../db/db";
 import { DATE, FLOAT, INTEGER, Model, Optional, STRING, TEXT } from "sequelize";
 
-interface Expense {
+export interface Expense {
   id: number;
   category: string;
   description: string;
   amount: number;
+  user_id?: number;
 }
 
 export interface ExpensesCreationAttributes extends Optional<Expense, "id"> {}

@@ -30,6 +30,7 @@ export const register = async (
     if (user) {
       return {
         state: ResponseStateType.ERROR,
+        statusCode: 400,
         message: "user already registered",
       };
     }

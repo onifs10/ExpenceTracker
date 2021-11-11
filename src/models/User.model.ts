@@ -3,10 +3,11 @@ import ExpenseModel, {
   ExpenseInstance,
   ExpensesCreationAttributes,
 } from "./Expense.model";
-import { INTEGER, Model, Optional, STRING } from "sequelize";
+import { INTEGER, Model, Optional, STRING, WhereOptions } from "sequelize";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import authConfig from "../config/auth.config";
+import { queryProps } from "../types/global.type";
 
 export interface User {
   id: number;
@@ -21,8 +22,10 @@ export interface UserInstance
     User {
   validatePassword: (password: string) => Promise<boolean>;
   genrateToken: () => { token: string; expires: number };
-  getExpenses: () => Promise<ExpenseInstance[]>;
-  createExpense: (expense: ExpensesCreationAttributes) => Promise<ExpenseInstance>;
+  getExpenses: (query?: queryProps) => Promise<ExpenseInstance[]>;
+  createExpense: (
+    expense: ExpensesCreationAttributes
+  ) => Promise<ExpenseInstance>;
 }
 
 const UserModel = DB.define<UserInstance>(
