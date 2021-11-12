@@ -14,7 +14,6 @@ export type LoginDataType = {
   password: string;
 };
 
-
 // functions
 export const register = async (
   data: RegisterDataType
@@ -41,6 +40,7 @@ export const register = async (
     data.email = data.email.toLowerCase();
     // create user
     const userData = await UserModel.create(data);
+    userData.setDataValue("password", undefined);
     return {
       state: ResponseStateType.SUCCESS,
       message: "account created succesfully",
@@ -80,6 +80,7 @@ export const login = async (
         message: "Invalid credentials",
       };
     } else {
+      user.setDataValue("password", undefined);
       return {
         state: ResponseStateType.SUCCESS,
         message: "logged in succesfully",

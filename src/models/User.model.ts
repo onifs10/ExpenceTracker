@@ -13,13 +13,14 @@ export interface User {
   id: number;
   username: string;
   email: string;
-  password: string;
+  password?: string;
 }
 
 export interface UserCreationAttributes extends Optional<User, "id"> {}
 export interface UserInstance
   extends Model<User, UserCreationAttributes>,
     User {
+  password: undefined;
   validatePassword: (password: string) => Promise<boolean>;
   genrateToken: () => { token: string; expires: number };
   getExpenses: (query?: queryProps) => Promise<ExpenseInstance[]>;
@@ -70,7 +71,6 @@ UserModel.prototype.genrateToken = function () {
     sub: this.id,
     iat: Date.now(),
   };
-  console.log(payload);
   const signedToken: string = sign(payload, authConfig.secret_key, {
     expiresIn: authConfig.expiresIn,
   });
@@ -78,12 +78,6 @@ UserModel.prototype.genrateToken = function () {
     token: "Bearer " + signedToken,
     expires: authConfig.expiresIn,
   };
-};
-
-UserModel.prototype.toJSON = function () {
-  const user = this.get();
-  delete user.password;
-  return user;
 };
 
 UserModel.hasMany(ExpenseModel, {

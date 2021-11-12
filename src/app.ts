@@ -7,7 +7,6 @@ import passport from "passport";
 import passportConfig from "./config/passport.config";
 import HandleProtectedRequest from "./utils/protectedRouteHandler.util";
 import ExpenseRouter from "./controllers/expense.controller";
-import { UserInstance } from "./models/User.model";
 
 // create app
 const app = express();
@@ -38,7 +37,7 @@ app.use("/api/expenses", ExpenseRouter);
 
 app.get("/", (req: Request, res: Response) => {
   HandleProtectedRequest(req, res, async () => {
-    res.send("The sedulous hyena ate the antelope!");
+    res.send("Expense tracker app");
   });
 });
 
