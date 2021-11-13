@@ -75,7 +75,7 @@ export const login = async (
       };
     }
     // hash password
-    const validPassword = await compare(data.password, user.password)
+    const validPassword = await user.validatePassword(data.password);
     if(!validPassword){
       return {
         state: ResponseStateType.ERROR,

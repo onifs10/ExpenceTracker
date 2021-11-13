@@ -27,11 +27,7 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
-UserModel.hasMany(ExpenseModel, {
-  foreignKey: 
-  {name: 'user_id',
-  allowNull: false}
-});
+
 
 
 // db sync
