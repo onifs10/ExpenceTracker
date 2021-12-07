@@ -85,6 +85,6 @@ UserModel.hasMany(ExpenseModel, {
   foreignKey: { name: "user_id", allowNull: false },
 });
 
-TransactionModel.belongsTo(UserModel)
+TransactionModel.belongsTo(UserModel);
 
 export default UserModel;

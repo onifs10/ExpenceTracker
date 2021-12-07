@@ -27,7 +27,7 @@ try {
 }
 
 // db sync
-DB.sync({force: true}).then(() => {
+DB.sync({ force: true }).then(() => {
   console.log("data base connected");
 });
 

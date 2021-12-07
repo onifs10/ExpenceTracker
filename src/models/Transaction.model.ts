@@ -1,7 +1,5 @@
 import DB from "../db/db";
-import { DATE, FLOAT, INTEGER, Model, Optional, STRING, TEXT } from "sequelize";
-import UserModel from "./User.model";
-
+import { INTEGER } from "sequelize";
 
 const TransactionModel = DB.define(
   "Transaction",
@@ -17,7 +15,5 @@ const TransactionModel = DB.define(
     tableName: "transaction",
   }
 );
-
-
 
 export default TransactionModel;

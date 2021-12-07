@@ -1,7 +1,5 @@
 import DB from "../db/db";
-import { DATE, FLOAT, INTEGER, Model, Optional, STRING, TEXT } from "sequelize";
-
-
+import { FLOAT, INTEGER } from "sequelize";
 
 const IncomeModel = DB.define(
   "Income",
@@ -13,15 +11,13 @@ const IncomeModel = DB.define(
       primaryKey: true,
     },
     amount: {
-        type: FLOAT,
-        allowNull: false
-    }
+      type: FLOAT,
+      allowNull: false,
+    },
   },
   {
     tableName: "income",
   }
 );
-
-
 
 export default IncomeModel;

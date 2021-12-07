@@ -9,6 +9,7 @@ const HandleProtectedRequest: HandleRequest = (req, res, next) => {
   const authenticationFunction = passport.authenticate("jwt", {
     session: false,
   });
+  // intiate the authentication
   authenticationFunction(req, res, next);
 };
 

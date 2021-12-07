@@ -1,5 +1,5 @@
 import DB from "../db/db";
-import { DATE, FLOAT, INTEGER, Model, Optional, STRING, TEXT } from "sequelize";
+import { FLOAT, INTEGER, Model, Optional, STRING, TEXT } from "sequelize";
 
 export interface Expense {
   id: number;
