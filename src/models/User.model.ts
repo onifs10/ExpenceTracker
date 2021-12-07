@@ -8,6 +8,7 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import authConfig from "../config/auth.config";
 import { queryProps } from "../types/global.type";
+import TransactionModel from "./Transaction.model";
 
 export interface User {
   id: number;
@@ -83,5 +84,7 @@ UserModel.prototype.genrateToken = function () {
 UserModel.hasMany(ExpenseModel, {
   foreignKey: { name: "user_id", allowNull: false },
 });
+
+TransactionModel.belongsTo(UserModel)
 
 export default UserModel;

@@ -43,7 +43,7 @@ const configTwo: DbConfigType = {
 
   USER: "root",
 
-  PASSWORD: "Booktime21#",
+  PASSWORD: "",
 
   DB: "expensetracker",
 
