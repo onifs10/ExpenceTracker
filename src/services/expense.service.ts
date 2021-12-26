@@ -1,4 +1,3 @@
-import { use } from "passport";
 import ExpenseModel from "../models/Expense.model";
 import { UserInstance } from "../models/User.model";
 import ServiceResponseType, { ResponseStateType } from "../types/global.type";
@@ -141,6 +140,7 @@ const deleteExpense = async (userId: number, expenseId: number) => {
     };
   }
 };
+
 const ExpenseSevices = {
   createExpense,
   getExpenses,

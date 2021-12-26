@@ -3,12 +3,13 @@ import ExpenseModel, {
   ExpenseInstance,
   ExpensesCreationAttributes,
 } from "./Expense.model";
-import { INTEGER, Model, Optional, STRING, WhereOptions } from "sequelize";
+import { INTEGER, Model, Optional, STRING } from "sequelize";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import authConfig from "../config/auth.config";
 import { queryProps } from "../types/global.type";
 import TransactionModel from "./Transaction.model";
+import IncomeModel from "./Income.model";
 
 export interface User {
   id: number;
@@ -82,6 +83,10 @@ UserModel.prototype.genrateToken = function () {
 };
 
 UserModel.hasMany(ExpenseModel, {
+  foreignKey: { name: "user_id", allowNull: false },
+});
+
+UserModel.hasOne(IncomeModel, {
   foreignKey: { name: "user_id", allowNull: false },
 });
 

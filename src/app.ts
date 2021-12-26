@@ -7,6 +7,7 @@ import passport from "passport";
 import passportConfig from "./config/passport.config";
 import HandleProtectedRequest from "./utils/protectedRouteHandler.util";
 import ExpenseRouter from "./controllers/expense.controller";
+import IncomeRouter from "./controllers/income.controller";
 
 // create app
 const app = express();
@@ -34,6 +35,7 @@ DB.sync({ force: true }).then(() => {
 // routes
 app.use("/api/auth", AuthRouter);
 app.use("/api/expenses", ExpenseRouter);
+app.use("/api/income", IncomeRouter);
 
 app.get("/", (req: Request, res: Response) => {
   HandleProtectedRequest(req, res, async () => {

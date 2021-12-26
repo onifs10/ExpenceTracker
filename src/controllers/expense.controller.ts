@@ -2,7 +2,7 @@ import { NextFunction, Request, Response, Router } from "express";
 import Joi from "joi";
 import HandleProtectedRequest from "../utils/protectedRouteHandler.util";
 import { ApiResponse } from "../utils/responseHelper";
-import ExpenseSevices from "../services/expense.services";
+import ExpenseSevices from "../services/expense.service";
 import generateResponse from "../utils/generateResponse";
 
 const ExpenseRouter: Router = Router();

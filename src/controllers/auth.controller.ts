@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express";
-import * as AuthServices from "../services/auth.services";
+import * as AuthServices from "../services/auth.service";
 import Joi from "joi";
-import { RegisterDataType, LoginDataType } from "../services/auth.services";
-import ServiceResponseType, { ResponseStateType } from "../types/global.type";
+import { RegisterDataType, LoginDataType } from "../services/auth.service";
+import ServiceResponseType from "../types/global.type";
 import { ApiResponse } from "../utils/responseHelper";
 import generateResponse from "../utils/generateResponse";
 

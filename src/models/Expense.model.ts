@@ -14,7 +14,7 @@ export interface ExpenseInstance
   extends Model<Expense, ExpensesCreationAttributes>,
     Expense {}
 
-const ExpenseModel = DB.define(
+const ExpenseModel = DB.define<ExpenseInstance>(
   "Expense",
   {
     id: {
